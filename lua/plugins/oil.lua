@@ -19,7 +19,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional icons
     config = function(_, opts)
       require("oil").setup(opts)
-      vim.keymap.set("n", "<leader>ee", require("oil").open_float, { desc = "Open File explorer" })
     end,
   }
 }
