@@ -1,6 +1,19 @@
 local keymap = vim.keymap
 
+-- Window movement
+keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
+keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to above window" })
+keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+
+-- Resize splits
+keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
+keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
+keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
+keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase window width" })
+
 keymap.set("n", "<leader>w", ":write<CR>")
+keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Escape terminal mode" })
 
 -- Oil keymaps
 keymap.set("n", "<leader>fe", require("oil").open, { desc = "Open File explorer" })
@@ -9,6 +22,9 @@ keymap.set("n", "<leader>fe", require("oil").open, { desc = "Open File explorer"
 keymap.set("n", "<leader>bb", require("buffer_manager.ui").toggle_quick_menu, { desc = "Open Buffer Manager" })
 keymap.set("n", '<Tab>', ":bnext<CR>", { desc = "Next Buffer"})
 keymap.set("n", '<S-Tab>', ":bprev<CR>", { desc = "Previous Buffer"})
+keymap.set("n", '<leader>x', ":bnext | bprevious | bd<CR>", { desc = "Close Buffer"})
+keymap.set("n", '<leader>X', ":bnext | bprevious | bd!<CR>", { desc = "Force Close Buffer"})
+keymap.set("n", '<leader>c', ":close<CR>", { desc = "Close Window"})
 
 -- Telescope keymaps
 keymap.set("n", "<leader>bf", require("utils.telescope").pick_buffers_filtered, { desc = "Find buffers" })
@@ -24,3 +40,5 @@ keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Go to definition
 keymap.set("n", "<leader>lr", vim.lsp.buf.references, { desc = "Go to references" })
 keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Rename" })
 keymap.set("n", "<leader>H", vim.lsp.buf.hover, { desc = "Hover" })
+
+keymap.set("n", '<leader>t', ":term<CR>", { desc = "Open Terminal"})
