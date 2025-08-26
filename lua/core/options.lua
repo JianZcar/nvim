@@ -31,20 +31,19 @@ opt.matchtime = 2                              -- How long to show matching brac
 opt.cmdheight = 1                              -- Command line height
 opt.completeopt = "menuone,noinsert,noselect"  -- Completion options 
 opt.showmode = false                           -- Don't show mode in command line 
-opt.pumheight = 10                             -- Popup menu height 
 opt.pumblend = 10                              -- Popup menu transparency 
 opt.winblend = 0                               -- Floating window transparency 
+opt.winborder = "rounded"
 opt.conceallevel = 0                           -- Don't hide markup 
 opt.concealcursor = ""                         -- Don't hide cursor line markup 
 opt.lazyredraw = true                          -- Don't redraw during macros
-opt.synmaxcol = 300                            -- Syntax highlighting limit 
 
 -- file handling
 opt.backup = false                             -- don't create backup files
 opt.writebackup = false                        -- don't create backup before writing
 opt.swapfile = false                           -- don't create swap files
 opt.undofile = true                            -- persistent undo
-opt.updatetime = 300                           -- faster completion
+opt.updatetime = 150                           -- faster completion
 opt.timeoutlen = 500                           -- key timeout duration
 opt.ttimeoutlen = 0                            -- key code timeout
 opt.autoread = true                            -- auto reload files changed outside vim
@@ -57,10 +56,8 @@ opt.backspace = "indent,eol,start"             -- Better backspace behavior
 opt.autochdir = false                          -- Don't auto change directory
 opt.iskeyword:append("-")                      -- Treat dash as part of word
 opt.path:append("**")                          -- include subdirectories in search
-opt.selection = "exclusive"                    -- Selection behavior
 opt.clipboard:append("unnamedplus")            -- Use system clipboard
 opt.mouse = "a"                                -- Enable mouse support
-opt.modifiable = true                          -- Allow buffer modifications
 opt.encoding = "UTF-8"                         -- Set encoding
 
 -- Cursor settings

@@ -20,6 +20,16 @@ return {
 
   -- Completion engine
   {
+    "onsails/lspkind-nvim",
+    config = function()
+      require("lspkind").init({
+        -- optional settings
+        mode = "symbol_text", -- show symbol + text
+        preset = "default",   -- can use codicons or default symbols
+      })
+    end,
+  },
+  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -31,6 +41,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      local lspkind = require('lspkind')
 
       cmp.setup({
         snippet = {
@@ -49,6 +60,13 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
+        formatting = {
+            format = lspkind.cmp_format(),
+        },
+        window = {
+          completion = cmp.config.window.bordered(),  -- adds border to completion popup
+          documentation = cmp.config.window.bordered(), -- adds border to docs
+        },
       })
     end,
   }

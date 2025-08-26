@@ -9,12 +9,9 @@ return {
         ["<CR>"] = "actions.select",     -- Enter directory or open file
         ["<Esc>"] = "actions.close",     -- Escape closes the float
       },
-      float = {
-        padding = 2,                     -- Padding around the float
-        max_width = 80,                  -- Max width of the float
-        max_height = 25,                 -- Max height of the float
-      },
-      show_hidden = true,                 -- Show dotfiles
+      view_options = {
+        show_hidden = true,                 -- Show dotfiles
+      }
     },
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional icons
     config = function(_, opts)
