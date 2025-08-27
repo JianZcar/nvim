@@ -14,21 +14,47 @@ return {
     lazy = false,
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
-      local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
-
-      local servers = { "lua_ls", "html", "cssls", "ts_ls", "pyright" }
-
-      mason_lspconfig.setup({
-        ensure_installed = servers,
-      })
-
-      -- Setup each server manually
-      for _, server in ipairs(servers) do
-        lspconfig[server].setup({
-          capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        })
-      end
+      local servers = { "lua_ls", "html", "cssls", "ts_ls", "pyright", "csharp_ls" }
+      mason_lspconfig.setup({ ensure_installed = servers })
     end,
+  },
+
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>qx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>qX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>qs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>ql",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>qL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>qQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
   },
 }

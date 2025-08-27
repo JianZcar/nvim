@@ -3,6 +3,14 @@ return {
   "nvim-lua/plenary.nvim",
   { "nvim-tree/nvim-web-devicons", lazy = true },
 
+  {
+    "folke/snacks.nvim",
+    opts = {
+      notifier = {
+      }
+    }
+  },
+
   -- Statusline
   {
     "nvim-lualine/lualine.nvim",
@@ -18,6 +26,53 @@ return {
     end,
   },
 
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      highlight = { enable = true },
+      indent = { enable = true },
+      auto_install = true,  -- only install the parser for the current buffer if missing
+    },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      scope = {
+        enabled = true,         -- enable scope guides
+        show_start = true,      -- underline start of scope
+        show_end = true,       -- underline end of scope
+        injected_languages = true, -- support TS injected langs
+        highlight = { "Function", "Label" }, -- highlight groups for scope
+      },
+    },
+    config = function(_, opts)
+      require("ibl").setup(opts)
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("treesitter-context").setup({
+        enable = true,         -- enable by default
+        max_lines = 0,         -- max number of context lines shown
+        multiline_threshold = 20,
+        trim_scope = "outer",
+        mode = "cursor",       -- show context based on cursor location ("cursor" or "topline")
+        separator = "─",       -- line shown under context for separation
+      })
+    end,
+  },
+
   -- Completion engine
   {
     "onsails/lspkind-nvim",
@@ -29,46 +84,58 @@ return {
       })
     end,
   },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "L3MON4D3/LuaSnip",
-      "saadparwaiz1/cmp_luasnip",
-    },
-    config = function()
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      local lspkind = require('lspkind')
 
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<Tab>"] = cmp.mapping.select_next_item(),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        }),
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-        }),
-        formatting = {
-            format = lspkind.cmp_format(),
-        },
-        window = {
-          completion = cmp.config.window.bordered(),  -- adds border to completion popup
-          documentation = cmp.config.window.bordered(), -- adds border to docs
-        },
-      })
+  {
+    "xzbdmw/colorful-menu.nvim",
+    config = function()
+        require("colorful-menu").setup({})
     end,
+  },
+
+  {
+    "Saghen/blink.cmp",
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    version = '1.*',
+    opts = {
+      keymap = {
+        preset = "default", -- uses sensible defaults
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      },
+      completion = {
+        accept = { auto_brackets = { enabled = true } },
+        documentation = { auto_show = true, auto_show_delay_ms = 500 },
+        menu = {
+          border = "rounded",
+          draw = {
+            -- We don't need label_description now because label and label_description are already
+            -- combined together in label by colorful-menu.nvim.
+            columns = { { "kind_icon" }, { "label", gap = 1 } },
+            components = {
+              label = {
+                text = function(ctx)
+                  return require("colorful-menu").blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require("colorful-menu").blink_components_highlight(ctx)
+                end,
+              },
+            },
+          },
+        },
+        list = {
+          selection = { preselect = false },
+        },
+      },
+      sources = {
+        default = { "lsp", "snippets", "path", "buffer" },
+      },
+      appearance = {
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = "mono",    -- like lspkind symbols
+      },
+      signature = { enabled = true },
+    },
+  opts_extend = { "sources.default" }
   }
 }
-

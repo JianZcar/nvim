@@ -16,7 +16,7 @@ keymap.set("n", "<leader>w", ":write<CR>")
 keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Escape terminal mode" })
 
 -- Oil keymaps
-keymap.set("n", "<leader>fe", require("oil").open, { desc = "Open File explorer" })
+keymap.set("n", "<leader>fe", require("oil").open_float, { desc = "Open File explorer" })
 
 -- Buffer manager
 keymap.set("n", "<leader>bb", require("buffer_manager.ui").toggle_quick_menu, { desc = "Open Buffer Manager" })
