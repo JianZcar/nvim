@@ -68,7 +68,7 @@ vim.opt.guicursor = {
   "r:hor20-Cursor/lCursor",                           -- Replace = horizontal bar
   "c:block-Cursor/lCursor",                           -- Command = block
   "o:hor50-Cursor/lCursor",                           -- Operator-pending = underline
-  "a:blinkwait700-blinkoff400-blinkon250",            -- blinking for *all others*
+  "a:blinkwait250-blinkoff250-blinkon250",            -- blinking for *all others*
 }
 
 -- Make Visual cursor stand out with a color

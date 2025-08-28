@@ -15,14 +15,15 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lualine").setup({
-        options = {
-          theme = "auto",
-          section_separators = { "", "" },
-          component_separators = { "|", "|" },
-        },
-      })
+    opts = {
+      options = {
+        theme = "auto",
+        section_separators = { "", "" },
+        component_separators = { "|", "|" },
+      },
+    },
+    config = function(_, opts)
+      require("lualine").setup(opts);
     end,
   },
 
@@ -61,15 +62,16 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("treesitter-context").setup({
-        enable = true,         -- enable by default
-        max_lines = 0,         -- max number of context lines shown
-        multiline_threshold = 20,
-        trim_scope = "outer",
-        mode = "cursor",       -- show context based on cursor location ("cursor" or "topline")
-        separator = "─",       -- line shown under context for separation
-      })
+    opts = {
+      enable = true,         -- enable by default
+      max_lines = 0,         -- max number of context lines shown
+      multiline_threshold = 20,
+      trim_scope = "outer",
+      mode = "cursor",       -- show context based on cursor location ("cursor" or "topline")
+      separator = "─",       -- line shown under context for separation
+    },
+    config = function(_, opts)
+      require("treesitter-context").setup(opts)
     end,
   },
 
@@ -137,5 +139,10 @@ return {
       signature = { enabled = true },
     },
   opts_extend = { "sources.default" }
+  },
+  {
+    "NStefan002/screenkey.nvim",
+    lazy = false,
+    version = "*", -- or branch = "main", to use the latest commit
   }
 }
