@@ -1,75 +1,73 @@
-local opt = vim.opt
-
 -- Basic settings
-opt.number = true                              -- Line numbers
-opt.relativenumber = true                      -- Relative line numbers
-opt.cursorline = true                          -- Highlight current line
-opt.wrap = true                               -- Don't wrap lines
-opt.scrolloff = 10                             -- Keep 10 lines above/below cursor 
-opt.sidescrolloff = 8                          -- Keep 8 columns left/right of cursor
+vim.opt.number = true                              -- Line numbers
+vim.opt.relativenumber = true                      -- Relative line numbers
+vim.opt.cursorline = true                          -- Highlight current line
+vim.opt.wrap = false                               -- Don't wrap lines
+vim.opt.scrolloff = 10                             -- Keep 10 lines above/below cursor 
+vim.opt.sidescrolloff = 8                          -- Keep 8 columns left/right of cursor
 
 -- Indentation
-opt.tabstop = 2                                -- Tab width
-opt.shiftwidth = 2                             -- Indent width
-opt.softtabstop = 2                            -- Soft tab stop
-opt.expandtab = true                           -- Use spaces instead of tabs
-opt.smartindent = true                         -- Smart auto-indenting
-opt.autoindent = true                          -- Copy indent from current line
+vim.opt.tabstop = 2                                -- Tab width
+vim.opt.shiftwidth = 2                             -- Indent width
+vim.opt.softtabstop = 2                            -- Soft tab stop
+vim.opt.expandtab = true                           -- Use spaces instead of tabs
+vim.opt.smartindent = true                         -- Smart auto-indenting
+vim.opt.autoindent = true                          -- Copy indent from current line
 
 -- Search settings
-opt.ignorecase = true                          -- Case insensitive search
-opt.smartcase = true                           -- Case sensitive if uppercase in search
-opt.hlsearch = true                           -- Don't highlight search results 
-opt.incsearch = true                           -- Show matches as you type
+vim.opt.ignorecase = true                          -- Case insensitive search
+vim.opt.smartcase = true                           -- Case sensitive if uppercase in search
+vim.opt.hlsearch = false                           -- Don't highlight search results 
+vim.opt.incsearch = true                           -- Show matches as you type
 
 -- Visual settings
-opt.termguicolors = true                       -- Enable 24-bit colors
-opt.signcolumn = "yes"                         -- Always show sign column
-opt.colorcolumn = "100"                        -- Show column at 100 characters
-opt.showmatch = true                           -- Highlight matching brackets
-opt.matchtime = 2                              -- How long to show matching bracket
-opt.cmdheight = 1                              -- Command line height
-opt.completeopt = "menuone,noinsert,noselect"  -- Completion options 
-opt.showmode = false                           -- Don't show mode in command line 
-opt.pumblend = 10                              -- Popup menu transparency 
-opt.winblend = 0                               -- Floating window transparency 
-opt.winborder = "rounded"
-opt.conceallevel = 0                           -- Don't hide markup 
-opt.concealcursor = ""                         -- Don't hide cursor line markup 
-opt.lazyredraw = true                          -- Don't redraw during macros
+vim.opt.termguicolors = true                       -- Enable 24-bit colors
+vim.opt.signcolumn = "yes"                         -- Always show sign column
+vim.opt.colorcolumn = "100"                        -- Show column at 100 characters
+vim.opt.showmatch = true                           -- Highlight matching brackets
+vim.opt.matchtime = 2                              -- How long to show matching bracket
+vim.opt.cmdheight = 1                              -- Command line height
+vim.opt.completeopt = "menuone,noinsert,noselect"  -- Completion options 
+vim.opt.showmode = false                           -- Don't show mode in command line 
+vim.opt.pumheight = 10                             -- Popup menu height 
+vim.opt.pumblend = 10                              -- Popup menu transparency 
+vim.opt.winblend = 0                               -- Floating window transparency 
+vim.opt.conceallevel = 0                           -- Don't hide markup 
+vim.opt.concealcursor = ""                         -- Don't hide cursor line markup 
+vim.opt.lazyredraw = true                          -- Don't redraw during macros
+vim.opt.synmaxcol = 300                            -- Syntax highlighting limit 
 
--- file handling
-opt.backup = false                             -- don't create backup files
-opt.writebackup = false                        -- don't create backup before writing
-opt.swapfile = false                           -- don't create swap files
-opt.undofile = true                            -- persistent undo
-opt.updatetime = 150                           -- faster completion
-opt.timeoutlen = 500                           -- key timeout duration
-opt.ttimeoutlen = 0                            -- key code timeout
-opt.autoread = true                            -- auto reload files changed outside vim
-opt.autowrite = false                          -- don't auto save
+-- File handling
+vim.opt.backup = false                             -- Don't create backup files
+vim.opt.writebackup = false                        -- Don't create backup before writing
+vim.opt.swapfile = false                           -- Don't create swap files
+vim.opt.undofile = true                            -- Persistent undo
+vim.opt.undodir = vim.fn.expand("~/.local/state/nvim/undo")  -- Undo directory
+vim.opt.updatetime = 250                           -- Faster completion
+vim.opt.timeoutlen = 500                           -- Key timeout duration
+vim.opt.ttimeoutlen = 0                            -- Key code timeout
+vim.opt.autoread = true                            -- Auto reload files changed outside vim
+vim.opt.autowrite = false                          -- Don't auto save
 
 -- Behavior settings
-opt.hidden = true                              -- Allow hidden buffers
-opt.errorbells = false                         -- No error bells
-opt.backspace = "indent,eol,start"             -- Better backspace behavior
-opt.autochdir = false                          -- Don't auto change directory
-opt.iskeyword:append("-")                      -- Treat dash as part of word
-opt.path:append("**")                          -- include subdirectories in search
-opt.clipboard:append("unnamedplus")            -- Use system clipboard
-opt.mouse = "a"                                -- Enable mouse support
-opt.encoding = "UTF-8"                         -- Set encoding
+vim.opt.hidden = true                              -- Allow hidden buffers
+vim.opt.errorbells = false                         -- No error bells
+vim.opt.backspace = "indent,eol,start"             -- Better backspace behavior
+vim.opt.autochdir = false                          -- Don't auto change directory
+vim.opt.iskeyword:append("-")                      -- Treat dash as part of word
+vim.opt.path:append("**")                          -- include subdirectories in search
+vim.opt.selection = "inclusive"                    -- Selection behavior
+vim.opt.mouse = "a"                                -- Enable mouse support
+vim.opt.clipboard:append("unnamedplus")            -- Use system clipboard
+vim.opt.modifiable = true                          -- Allow buffer modifications
+vim.opt.encoding = "UTF-8"                         -- Set encoding
 
--- Cursor settings
 vim.opt.guicursor = {
   "n:block-Cursor",                                   -- Normal = solid block, no blink
-  "v:block-VisualCursor",                             -- Visual = block (use diff color)
+  "v:block-Cursor",                             -- Visual = block (use diff color)
   "i:ver25-Cursor/lCursor",                           -- Insert = vertical bar
   "r:hor20-Cursor/lCursor",                           -- Replace = horizontal bar
   "c:block-Cursor/lCursor",                           -- Command = block
   "o:hor50-Cursor/lCursor",                           -- Operator-pending = underline
   "a:blinkwait250-blinkoff250-blinkon250",            -- blinking for *all others*
 }
-
--- Make Visual cursor stand out with a color
-vim.api.nvim_set_hl(0, "VisualCursor", { link = "IncSearch" })

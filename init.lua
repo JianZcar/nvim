@@ -1,20 +1,14 @@
 require("core.options")
-require("core.lazy")
-require("core.keymaps")
+require("core.mini-deps")
+require("plugins")
 
-vim.opt.shortmess:append("I")
-vim.opt.fillchars:append({ eob = " " })
+local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
-vim.api.nvim_set_hl(0, "BlinkCmpMenu", { link = "NormalFloat" })
-vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "FloatBorder" })
-vim.api.nvim_set_hl(0, "BlinkCmpDoc", { link = "NormalFloat" })
-vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "FloatBorder" })
+now(function()
+  require("core.keymaps")
+  require("config.ui")
+  require("config.lsp")
+end)
 
-vim.diagnostic.config({
-  virtual_text = true,   -- show inline diagnostics
-  signs = false,          -- show signs in the gutter
-  update_in_insert = false,
-})
-
--- require("core.autocmds")
-
+later(function()
+end)
