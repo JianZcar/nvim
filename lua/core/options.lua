@@ -17,7 +17,7 @@ vim.opt.autoindent = true                          -- Copy indent from current l
 -- Search settings
 vim.opt.ignorecase = true                          -- Case insensitive search
 vim.opt.smartcase = true                           -- Case sensitive if uppercase in search
-vim.opt.hlsearch = false                           -- Don't highlight search results 
+vim.opt.hlsearch = true                           -- Highlight search results 
 vim.opt.incsearch = true                           -- Show matches as you type
 
 -- Visual settings
@@ -71,3 +71,12 @@ vim.opt.guicursor = {
   "o:hor50-Cursor/lCursor",                           -- Operator-pending = underline
   "a:blinkwait250-blinkoff250-blinkon250",            -- blinking for *all others*
 }
+
+-- Folding settings
+vim.opt.foldmethod = "expr"                             -- Use expression for folding
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()" -- Use treesitter for folding
+vim.opt.foldlevel = 99                                  -- Start with all folds open
+
+-- Split behavior
+vim.opt.splitbelow = true                          -- Horizontal splits go below
+vim.opt.splitright = true                          -- Vertical splits go right
