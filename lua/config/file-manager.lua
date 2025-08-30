@@ -11,9 +11,6 @@ local config = {
   },
   confirmation = {
     border = "none",
-    win_options = {
-      winblend = 10,
-    },
   },
 }
 

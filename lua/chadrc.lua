@@ -6,11 +6,15 @@ M.base46 = {
 M.ui = {
   cmp = {
     lspkind_text = true,
-    style = "flat_dark", -- default/flat_light/flat_dark/atom/atom_colored
+    style = "flat_dark",
     format_colors = {
     lsp = true,
     },
   },
+  statusline = {
+    theme = "vscode_colored"
+  },
+  tabufline = { enabled = false }
 }
 
 return M

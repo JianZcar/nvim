@@ -37,7 +37,13 @@ local blink = {
 
 local telescope = {
   defaults = {
+    sorting_strategy = "ascending",
     layout_strategy = "vertical",
+    layout_config = {
+            width = 70,
+            height = 40,
+            prompt_position = "top",
+          },
   },
 }
 

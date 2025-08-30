@@ -1,9 +1,7 @@
-require("core.mini-deps")
+require("core.bootstrap")
 require("plugins")
 
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
-
 
 now(function()
   require("core.options")
@@ -13,7 +11,4 @@ now(function()
   require("config.ui")
   require("config.lsp")
   require("config.file-manager")
-end)
-
-later(function()
 end)
