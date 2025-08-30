@@ -30,12 +30,13 @@ vim.opt.cmdheight = 1                              -- Command line height
 vim.opt.completeopt = "menuone,noinsert,noselect"  -- Completion options 
 vim.opt.showmode = false                           -- Don't show mode in command line 
 vim.opt.pumheight = 10                             -- Popup menu height 
-vim.opt.pumblend = 10                              -- Popup menu transparency 
+vim.opt.pumblend = 0                               -- Popup menu transparency 
 vim.opt.winblend = 0                               -- Floating window transparency 
 vim.opt.conceallevel = 0                           -- Don't hide markup 
 vim.opt.concealcursor = ""                         -- Don't hide cursor line markup 
 vim.opt.lazyredraw = true                          -- Don't redraw during macros
 vim.opt.synmaxcol = 300                            -- Syntax highlighting limit 
+vim.opt.shortmess:append("I")                      -- disables nvim intro
 
 -- File handling
 vim.opt.backup = false                             -- Don't create backup files

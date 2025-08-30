@@ -1,5 +1,8 @@
 return {
   {
+    source = "nvchad/ui",
+  },
+  {
     source = "nvim-lualine/lualine.nvim",
     depends = { "nvim-tree/nvim-web-devicons" }
   },
@@ -8,10 +11,7 @@ return {
   },
   {
     source = "saghen/blink.cmp",
-    depends = {
-      "rafamadriz/friendly-snippets", "xzbdmw/colorful-menu.nvim",
-      "onsails/lspkind-nvim"
-    },
+    depends = { "rafamadriz/friendly-snippets", "L3MON4D3/LuaSnip", "xzbdmw/colorful-menu.nvim" },
     checkout = "v1.6.0"
   },
   {

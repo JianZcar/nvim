@@ -1,6 +1,4 @@
 return {
-  {
-    source = "rmehri01/onenord.nvim",
-    name = "onenord",
-  },
+  { source = "nvchad/base46" },
+  { source = "nvchad/volt" }
 }

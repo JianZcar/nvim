@@ -2,7 +2,14 @@
 vim.g.mapleader = " "                              -- Set leader key to space
 vim.g.maplocalleader = " "                         -- Set local leader key (NEW)
 
+-- Insert mode mappings
+vim.keymap.set("i", ";;", "<Esc>", { desc = "Normal Mode" })
+vim.keymap.set("i", "::", "<Esc>v", { desc = "Visual Mode" })
+
+-- Visual mode mappings
+
 -- Normal mode mappings
+vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find file" })
 vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear search highlights" })
 
 -- Center screen when jumping
@@ -21,6 +28,15 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 -- Buffer navigation
 vim.keymap.set("n", "<leader>[", ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>]", ":bprevious<CR>", { desc = "Previous buffer" })
+
+-- Tab navigation
+vim.keymap.set("n", "<leader><Tab>", ":tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<Tab>", ":tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<S-Tab>", ":tabprevious<CR>", { desc = "Previous tab" })
+
+vim.keymap.set("n", "<leader>th", function()
+  require("nvchad.themes").open()
+end, { desc = "telescope nvchad themes" })
 
 vim.keymap.set("n", "<leader>e", function()
   require("oil").open(nil, {
