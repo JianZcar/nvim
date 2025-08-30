@@ -1,6 +1,6 @@
 return {
   {
-    source = "catppuccin/nvim",
-    name = "catppuccin",
+    source = "rmehri01/onenord.nvim",
+    name = "onenord",
   },
 }

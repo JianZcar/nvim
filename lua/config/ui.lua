@@ -1,12 +1,31 @@
 vim.opt.shortmess:append("I") -- disables nvim intro
 
-local colorscheme = "catppuccin"
+local colorscheme = "onenord"
 local colorscheme_setup = {
-  flavour = "auto", -- latte, frappe, macchiato, mocha
-  background = { light = "latte", dark = "frappe" },
-  transparent_background = false,
-  float = { transparent = false, solid = false },
-  auto_integrations = true,
+  theme = "light", -- "dark" or "light". Alternatively, remove the option and set vim.o.background instead
+  borders = true, -- Split window borders
+  fade_nc = false, -- Fade non-current windows, making them more distinguishable
+  -- Style that is applied to various groups: see `highlight-args` for options
+  styles = {
+    comments    = "italic",
+    strings     = "NONE",
+    keywords    = "bold,italic",
+    functions   = "bold",
+    variables   = "NONE",
+    diagnostics = "undercurl",
+  },
+  disable = {
+    background = false, -- Disable setting the background color
+    float_background = false, -- Disable setting the background color for floating windows
+    cursorline = false, -- Disable the cursorline
+    eob_lines = true, -- Hide the end-of-buffer lines
+  },
+  -- Inverse highlight for different groups
+  inverse = {
+    match_paren = false,
+  },
+  custom_highlights = {}, -- Overwrite default highlight groups
+  custom_colors = {}, -- Overwrite default colors
 }
 
 require("gitsigns").setup({
@@ -57,7 +76,7 @@ local cmp = {
   },
 }
 
-require("catppuccin").setup(colorscheme_setup)
+require("onenord").setup(colorscheme_setup)
 vim.cmd.colorscheme(colorscheme)
 
 require('lualine').setup {}
