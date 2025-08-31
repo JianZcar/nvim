@@ -1,4 +1,4 @@
-local servers = { "lua_ls", "html", "cssls", "ts_ls", "pyright", "csharp_ls" }
+local servers = { "lua_ls", "html", "cssls", "ts_ls", "pylsp", "csharp_ls" }
 
 vim.diagnostic.config({
   virtual_text = true,    -- show inline diagnostics

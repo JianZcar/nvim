@@ -71,14 +71,17 @@ vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
 vim.keymap.set("n", "<leader>gt", telescope.git_status, { desc = "Git status" })
 
 -- LSP
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set("n", "<leader>lr", require("nvchad.lsp.renamer"), { desc = "Rename symbol" })
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "References" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover doc" })
 
 -- Formatting
-local lsp_format = function() vim.lsp.buf.format({ async = true }) end
+local lsp_format = function()
+  vim.cmd([[keeppatterns %s/\s\+$//e]])
+  vim.lsp.buf.format({ async = true })
+end
 vim.keymap.set("n", "<leader>lf", lsp_format, { desc = "Format buffer" })
 vim.keymap.set("v", "<leader>lf", lsp_format, { desc = "Format selection" })
 
