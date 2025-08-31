@@ -6,6 +6,9 @@ return {
     hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
   },
   {
+    source = "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  {
     source = "williamboman/mason.nvim",
   },
 }
