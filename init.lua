@@ -10,5 +10,6 @@ now(function()
 
   require("config.ui")
   require("config.lsp")
+  require("config.autocomplete")
   require("config.file-manager")
 end)

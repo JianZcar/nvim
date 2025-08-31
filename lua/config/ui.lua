@@ -2,49 +2,82 @@ require("gitsigns").setup({
   current_line_blame = true,
 })
 
-local nvchad_blink = require("nvchad.blink.config")
-local blink = {
-  cmdline = {
-    enabled = false,
-  },
-  keymap = {
-    preset = "default", -- uses sensible defaults
-    ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-    ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-  },
-  completion = {
-    accept = { auto_brackets = { enabled = true } },
-    documentation = {
-      auto_show = true,
-    },
-    menu = {
-      draw = {
-        components = {
-          label = {
-            text = function(ctx)
-              return require("colorful-menu").blink_components_text(ctx)
-            end,
-            highlight = function(ctx)
-              return require("colorful-menu").blink_components_highlight(ctx)
-            end,
-          },
-        },
-      },
-    },
-    list = { selection = { preselect = false } },
+local indent = {
+  scope = {
+    enabled = true,                      -- enable scope guides
+    show_start = true,                   -- underline start of scope
+    show_end = true,                     -- underline end of scope
+    injected_languages = true,           -- support TS injected langs
+    highlight = { "Function", "Label" }, -- highlight groups for scope
   },
 }
+
+local cybu = {
+  style = {
+    path = "relative", -- absolute, relative, tail (filename only),
+    -- tail_dir (filename & parent dir)
+    path_abbreviation = "none", -- none, shortened
+    border = "single", -- single, double, rounded, none
+    separator = " ", -- string used as separator
+    prefix = "…", -- string used as prefix for truncated paths
+    padding = 1, -- left & right padding in number of spaces
+    hide_buffer_id = true, -- hide buffer IDs in window
+    devicons = {
+      enabled = true, -- enable or disable web dev icons
+      colored = true, -- enable color for web dev icons
+      truncate = true, -- truncate wide icons to one char width
+    },
+    highlights = { -- see highlights via :highlight
+      current_buffer = "TelescopeSelection", -- selected buffer
+      adjacent_buffers = "TelescopeNormal", -- other buffers
+      background = "TelescopeNormal", -- background
+      border = "TelescopeBorder", -- border              -- border of the window
+    },
+  }
+}
+
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+local function delete_selected(prompt_bufnr)
+  local picker = action_state.get_current_picker(prompt_bufnr)
+  local multi = picker:get_multi_selection()
+  if vim.tbl_isempty(multi) then
+    local s = action_state.get_selected_entry()
+    vim.api.nvim_buf_delete(s.bufnr, { force = true })
+  else
+    for _, e in ipairs(multi) do vim.api.nvim_buf_delete(e.bufnr, { force = true }) end
+  end
+  actions.close(prompt_bufnr)
+end
 
 local telescope = {
   defaults = {
     sorting_strategy = "ascending",
     layout_strategy = "vertical",
     layout_config = {
-            width = 70,
-            height = 40,
-            prompt_position = "top",
-          },
+      width = 60,
+      height = 30,
+      prompt_position = "top",
+    },
   },
+  pickers = {
+    buffers = {
+      attach_mappings = function(prompt_bufnr, map)
+        map("i", "<C-d>", function() delete_selected(prompt_bufnr) end)
+        map("n", "<C-d>", function() delete_selected(prompt_bufnr) end)
+        return true
+      end,
+    },
+  },
+  extensions = {
+    ["ui-select"] = {
+    }
+  }
+}
+
+local fidget = {
+  notification = { override_vim_notify = true }
 }
 
 require("base46").load_all_highlights()
@@ -53,12 +86,8 @@ for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
 end
 require("nvchad")
 
-for k,v in pairs(nvchad_blink) do
-  if blink[k] == nil then
-    blink[k] = v
-  end
-end
-
-require("colorful-menu").setup()
-require("blink.cmp").setup(blink)
+require("cybu").setup(cybu)
+require("fidget").setup(fidget)
+require("ibl").setup(indent)
 require("telescope").setup(telescope)
+require("telescope").load_extension("ui-select")

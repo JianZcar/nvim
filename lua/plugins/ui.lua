@@ -10,11 +10,17 @@ return {
     source = "lewis6991/gitsigns.nvim",
   },
   {
-    source = "saghen/blink.cmp",
-    depends = { "rafamadriz/friendly-snippets", "L3MON4D3/LuaSnip", "xzbdmw/colorful-menu.nvim" },
-    checkout = "v1.6.0"
+    source = "folke/which-key.nvim",
   },
   {
-    source = "folke/which-key.nvim",
+    source = "j-hui/fidget.nvim",
+    checkout = "v1.6.1"
+  },
+  {
+    source = "lukas-reineke/indent-blankline.nvim"
+  },
+  {
+    source = "ghillb/cybu.nvim",
+    depends = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"}
   }
 }

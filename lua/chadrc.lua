@@ -1,7 +1,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "material-lighter",
+	theme = "one_light",
 }
 M.ui = {
   cmp = {
