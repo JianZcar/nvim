@@ -5,7 +5,6 @@ return {
     checkout = "v1.6.0"
   },
   {
-    source = "saghen/blink.pairs",
-    checkout = "v0.3.0"
+    source = "windwp/nvim-autopairs"
   }
 }

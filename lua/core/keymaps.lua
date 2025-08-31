@@ -79,7 +79,7 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover doc" })
 
 -- Formatting
 local lsp_format = function()
-  vim.cmd([[keeppatterns %s/\s\+$//e]])
+  strip_trailing_whitespace()
   vim.lsp.buf.format({ async = true })
 end
 vim.keymap.set("n", "<leader>lf", lsp_format, { desc = "Format buffer" })

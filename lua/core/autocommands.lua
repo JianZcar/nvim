@@ -7,5 +7,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
-  command = [[%s/\s\+$//e]],
+  callback = strip_trailing_whitespace,
 })

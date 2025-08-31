@@ -32,6 +32,11 @@ local blink = {
   },
 }
 
+autopairs = {
+  check_ts = true, -- enable treesitter integration
+  fast_wrap = {},
+}
+
 for k, v in pairs(nvchad_blink) do
   if blink[k] == nil then
     blink[k] = v
@@ -40,4 +45,4 @@ end
 
 require("colorful-menu").setup()
 require("blink.cmp").setup(blink)
-require("blink.pairs.mappings").enable()
+require("nvim-autopairs").setup(autopairs)
