@@ -1,44 +1,45 @@
 # Neovim Config
 
-This is my personal Neovim setup. It’s designed to be **fast**, **lightweight**, and **easy to hack on**. The idea is to keep only what I actually use, while still having modern quality-of-life features like autocompletion, treesitter, and a unified UI.
+This is my personal Neovim setup. It’s designed to be **fast**, **lightweight**, and **easy to hack on**. The goal is to keep only what I actually use, while still having modern features like autocompletion, treesitter, and a unified UI.
 
-I use **[`nvchad/ui`](https://github.com/NvChad/ui)** for a consistent, minimal interface and **[`mini.deps`](https://github.com/nvim-mini/mini.deps)** for plugin management. This combination keeps things clean and avoids the complexity of heavier frameworks like LazyVim or NvChad itself, while still giving me full control over my config.
+I use **[`nvchad/ui`](https://github.com/NvChad/ui)** for a consistent interface and **[`mini.deps`](https://github.com/nvim-mini/mini.deps)** for plugin management. This combination keeps things simple and avoids the complexity of heavier frameworks, while still giving me full control over my config.
 
 ---
 
 ## Why This Setup?
 
-* **🚀 Fast** – Minimal plugin loader (`mini.deps`) means startup is almost instant, even on weaker machines.
-* **🧩 Modular** – Plugins are split into clear categories. Configs live in their own files, so it’s easy to replace or remove anything.
-* **🎨 Unified UI** – `nvchad/ui` makes the look and feel consistent across components like statusline, tabline, and telescope.
-* **🛠️ Practical** – Includes all the essentials: LSP, completion, autopairs, commenting, git integration, fuzzy finding, etc. But nothing bloated.
+* **Fast** – Minimal plugin loader (`mini.deps`) means startup is nearly instant.
+* **Modular** – Plugins are split into categories, and configs live in their own files.
+* **Unified UI** – `nvchad/ui` provides consistency across statusline, tabline, telescope, and other components.
+* **Practical** – Includes all essentials: LSP, completion, autopairs, commenting, git integration, fuzzy finding, etc., without unnecessary extras.
 
 ---
 
 ## Config Layout
 
-* **`lua/core/`** → Base Neovim setup (options, keymaps, autocmds).
-* **`lua/plugins/`** → Plugin specs, organized by purpose (UI, LSP, editing, tools). Loaded with `mini.deps`.
-* **`lua/config/`** → Plugin configurations (e.g. `lsp.lua`, `ui.lua`, `git.lua`).
+* **`lua/core/`** - Base Neovim setup (options, keymaps, autocmds)
+* **`lua/plugins/`** - Plugin specs, organized by purpose, loaded with `mini.deps`
+* **`lua/config/`** - Plugin configurations (e.g. `lsp.lua`, `ui.lua`, `file-manager.lua`)
 
-This separation makes it **easy to maintain**: plugin installation stays minimal, while configs are neatly modular.
+This separation makes the setup easy to maintain: plugin installation remains minimal, while configs are modular.
 
 ---
 
-## Features at a Glance
+## Features
 
-✅ Treesitter syntax highlighting & indentation
-✅ Intuitive File Management via Oil.nvim
-✅ LSP with autocompletion (via `blink.cmp`)
-✅ Autopairs, commenting, surround editing
-✅ Telescope fuzzy finder with custom mappings
-✅ Git integration (signs, diffs, statusline info)
-✅ Unified UI via `nvchad/ui`
-✅ Fast startup thanks to `mini.deps`
+* Treesitter syntax highlighting & indentation
+* File management via Oil.nvim
+* LSP with autocompletion (`blink.cmp`)
+* Autopairs, commenting, surround editing
+* Telescope fuzzy finder with custom mappings
+* Git integration (signs, diffs, statusline info)
+* Unified UI via `nvchad/ui`
+* Fast startup with `mini.deps`
 
 ---
 
 ## Install
+> I recommend forking the repo to make it your own
 
 1. Clone the repo:
 
@@ -47,5 +48,3 @@ This separation makes it **easy to maintain**: plugin installation stays minimal
    ```
 
 2. Open Neovim — plugins will install automatically.
-
----
