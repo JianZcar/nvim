@@ -10,7 +10,13 @@ local config = {
     show_hidden = true,
   },
   confirmation = {
-    border = "none",
+    border = "single",
+    width = 40,
+    max_width = 40,
+    min_width = 40,
+    win_options = {
+      winhighlight = "FloatBorder:TelescopeBorder",
+    },
   },
 }
 

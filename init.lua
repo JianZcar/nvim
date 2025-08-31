@@ -10,6 +10,7 @@ now(function()
   require("core.autocommands")
 
   require("config.ui")
+  require("config.treesitter")
   require("config.lsp")
   require("config.autocomplete")
   require("config.file-manager")

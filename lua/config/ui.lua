@@ -56,8 +56,8 @@ local telescope = {
     sorting_strategy = "ascending",
     layout_strategy = "vertical",
     layout_config = {
-      width = 60,
-      height = 30,
+      width = 70,
+      height = 35,
       prompt_position = "top",
     },
   },
