@@ -90,3 +90,29 @@ vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>", { desc 
 vim.keymap.set("n", "<leader>xw", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "Buffer diagnostics" })
 vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist toggle<CR>", { desc = "Location list" })
 vim.keymap.set("n", "<leader>xq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix list" })
+
+-- Treesitter
+-- Treesitter Textobjects
+vim.keymap.set({ "x", "o" }, "af", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+end, { desc = "Function outer" })
+
+vim.keymap.set({ "x", "o" }, "if", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
+end, { desc = "Function inner" })
+
+vim.keymap.set({ "x", "o" }, "ac", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
+end, { desc = "Class outer" })
+
+vim.keymap.set({ "x", "o" }, "ic", function()
+  require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
+end, { desc = "Class inner" })
+
+vim.keymap.set("n", "<leader>a", function()
+  require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+end, { desc = "Swap next param" })
+
+vim.keymap.set("n", "<leader>A", function()
+  require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+end, { desc = "Swap prev param" })
