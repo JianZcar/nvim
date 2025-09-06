@@ -44,7 +44,7 @@ This separation makes the setup easy to maintain: plugin installation remains mi
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/JianZcar/nvim-setup.git ~/.config/nvim
+   git clone https://github.com/JianZcar/nvim.git ~/.config/nvim
    ```
 
 2. Open Neovim — plugins will install automatically.
