@@ -2,9 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Modules
-local telescope = require("telescope.builtin")
-
 -- Insert mode
 vim.keymap.set("i", ";;", "<Esc>", { desc = "Exit insert" })
 vim.keymap.set("i", "::", "<Esc>v", { desc = "Exit insert + visual" })
@@ -38,7 +35,6 @@ vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease wi
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase width" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bb", telescope.buffers, { desc = "List buffers" })
 vim.keymap.set("n", "<Tab>", "<Plug>(CybuNext)", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<Plug>(CybuPrev)", { desc = "Prev buffer" })
 vim.keymap.set("n", "<leader>bc", function()
@@ -58,7 +54,6 @@ vim.keymap.set("n", "<leader>ft", function()
 end, { desc = "Pick theme" })
 
 -- Files
-vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find file" })
 vim.keymap.set("n", "<leader>e", function()
   require("oil").open(nil, { preview = { vertical = true } })
 end, { desc = "Explore files" })
@@ -67,8 +62,21 @@ vim.keymap.set("n", "<leader>E", function()
 end, { desc = "Explore cwd" })
 
 -- Telescope shortcuts
-vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
-vim.keymap.set("n", "<leader>gt", telescope.git_status, { desc = "Git status" })
+vim.keymap.set("n", "<leader>ff", function()
+  require("telescope.builtin").find_files()
+end, { desc = "Find file" })
+
+vim.keymap.set("n", "<leader>fg", function()
+  require("telescope.builtin").live_grep()
+end, { desc = "Live grep" })
+
+vim.keymap.set("n", "<leader>bb", function()
+  require("telescope.builtin").buffers()
+end, { desc = "List buffers" })
+
+vim.keymap.set("n", "<leader>gt", function()
+  require("telescope.builtin").git_status()
+end, { desc = "Git status" })
 
 -- LSP
 vim.keymap.set("n", "<leader>lr", require("nvchad.lsp.renamer"), { desc = "Rename symbol" })

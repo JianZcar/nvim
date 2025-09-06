@@ -3,10 +3,6 @@ return {
     source = "nvchad/ui",
   },
   {
-    source = "nvim-lualine/lualine.nvim",
-    depends = { "nvim-tree/nvim-web-devicons" }
-  },
-  {
     source = "lewis6991/gitsigns.nvim",
   },
   {
