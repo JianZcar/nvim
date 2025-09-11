@@ -6,7 +6,7 @@ local indent = {
   scope = {
     enabled = true,                      -- enable scope guides
     show_start = true,                   -- underline start of scope
-    show_end = false,                     -- underline end of scope
+    show_end = false,                    -- underline end of scope
     injected_languages = true,           -- support TS injected langs
     highlight = { "Function", "Label" }, -- highlight groups for scope
   },
@@ -35,6 +35,12 @@ local cybu = {
     },
   }
 }
+
+require("markview").setup({
+  experimental = {
+    check_rtp_message = false
+  }
+});
 
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")

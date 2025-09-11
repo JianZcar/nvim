@@ -1,6 +1,7 @@
 return {
   {
     source = "nvim-treesitter/nvim-treesitter",
+    depends = { "OXY2DEV/markview.nvim" },
     checkout = "main",
     hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
   },
