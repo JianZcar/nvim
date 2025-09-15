@@ -68,6 +68,9 @@ local telescope = {
     },
   },
   pickers = {
+    find_files = {
+      hidden = true
+    },
     buffers = {
       attach_mappings = function(prompt_bufnr, map)
         map("i", "<C-d>", function() delete_selected(prompt_bufnr) end)

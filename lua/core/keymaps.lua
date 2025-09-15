@@ -3,14 +3,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Insert mode
-vim.keymap.set("i", ";;", "<Esc>", { desc = "Exit insert" })
-vim.keymap.set("i", "::", "<Esc>v", { desc = "Exit insert + visual" })
+-- vim.keymap.set("i", ";;", "<Esc>", { desc = "Exit insert" })
+-- vim.keymap.set("i", "::", "<Esc>v", { desc = "Exit insert + visual" })
 
 -- Visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move block down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move block up" })
 
 -- Normal: save / quit / misc
+vim.keymap.set('t', ';;', [[<C-\><C-n>]], { noremap = true })
+
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force quit all" })
