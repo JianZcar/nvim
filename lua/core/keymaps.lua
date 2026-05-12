@@ -16,8 +16,9 @@ vim.keymap.set('t', ';;', [[<C-\><C-n>]], { noremap = true })
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>Q", ":qa!<CR>", { desc = "Force quit all" })
-vim.keymap.set("n", "<leader>W", ":wq<CR>", { desc = "Save & quit" })
-vim.keymap.set("n", "<leader>c", ":nohlsearch<CR>", { desc = "Clear highlights" })
+vim.keymap.set("n", "<leader>W", ":wa<CR>", { desc = "Save all" })
+vim.keymap.set("n", "<leader>c", ":bd<CR>", { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>C", ":nohlsearch<CR>", { desc = "Clear highlights" })
 
 -- Centered navigation
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search" })

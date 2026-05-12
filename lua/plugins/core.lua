@@ -10,9 +10,12 @@ return {
     checkout = "main"
   },
   {
-    source = "williamboman/mason.nvim",
+    source = "williamboman/mason.nvim"
   },
   {
-    source = "daliusd/incr.nvim",
+    source = "daliusd/incr.nvim"
+  },
+  {
+    source = "samjwill/nvim-unception"
   }
 }

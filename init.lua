@@ -3,6 +3,8 @@ require("plugins")
 
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
+vim.o.title = true
+
 now(function()
   require("core.utils")
   require("core.options")
