@@ -102,6 +102,32 @@ vim.keymap.set("n", "<leader>xw", "<cmd>Trouble diagnostics toggle filter.buf=0<
 vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist toggle<CR>", { desc = "Location list" })
 vim.keymap.set("n", "<leader>xq", "<cmd>Trouble qflist toggle<CR>", { desc = "Quickfix list" })
 
+-- Screenkey
+vim.keymap.set("n", "<leader>st", function()
+  require("screenkey").toggle()
+end, { desc = "Toggle screenkey" })
+
+-- Obsidian
+vim.keymap.set("n", "<leader>oo", "<cmd>Obsidian today<CR>", { desc = "Today's daily note" })
+vim.keymap.set("n", "<leader>os", "<cmd>Obsidian search<CR>", { desc = "Search notes" })
+vim.keymap.set("n", "<leader>oq", "<cmd>Obsidian quick_switch<CR>", { desc = "Quick switch notes" })
+vim.keymap.set("n", "<leader>ol", "<cmd>Obsidian open<CR>", { desc = "Open note" })
+vim.keymap.set("n", "<leader>od", "<cmd>Obsidian dailies<CR>", { desc = "Dailies picker" })
+vim.keymap.set("n", "<leader>on", "<cmd>Obsidian new<CR>", { desc = "New note" })
+vim.keymap.set("n", "<leader>ot", "<cmd>Obsidian tags<CR>", { desc = "Tags picker" })
+vim.keymap.set("n", "<leader>ob", "<cmd>Obsidian backlinks<CR>", { desc = "Backlinks" })
+vim.keymap.set("n", "<leader>o.", "<cmd>Obsidian follow_link<CR>", { desc = "Follow link" })
+vim.keymap.set("n", "<leader>o,", "<cmd>Obsidian toc<CR>", { desc = "Table of contents" })
+vim.keymap.set("n", "<leader>of", "<cmd>Obsidian footnotes<CR>", { desc = "Footnotes" })
+vim.keymap.set("n", "<leader>oi", "<cmd>Obsidian paste_img<CR>", { desc = "Paste image" })
+vim.keymap.set("n", "<leader>or", "<cmd>Obsidian rename<CR>", { desc = "Rename note" })
+vim.keymap.set("n", "<leader>ox", "<cmd>Obsidian toggle_checkbox<CR>", { desc = "Toggle checkbox" })
+vim.keymap.set("n", "<leader>otm", "<cmd>Obsidian template<CR>", { desc = "Insert template" })
+vim.keymap.set("n", "<leader>oun", "<cmd>Obsidian unique_note<CR>", { desc = "New unique note" })
+vim.keymap.set("n", "<leader>ouw", "<cmd>Obsidian workspace<CR>", { desc = "Switch workspace" })
+vim.keymap.set("v", "<leader>oe", "<cmd>Obsidian extract_note<CR>", { desc = "Extract note" })
+vim.keymap.set("v", "<leader>ol", "<cmd>Obsidian link<CR>", { desc = "Link selection" })
+
 -- Treesitter
 -- Treesitter Textobjects
 vim.keymap.set({ "x", "o" }, "af", function()

@@ -1,45 +1,88 @@
 # Neovim Config
 
-This is my personal Neovim setup. It’s designed to be **fast**, **lightweight**, and **easy to hack on**. The goal is to keep only what I actually use, while still having modern features like autocompletion, treesitter, and a unified UI.
+This is my personal Neovim setup. It's designed to be **fast**, **lightweight**, and **easy to hack on**. The goal is to keep only what I actually use, while still having modern features like autocompletion, treesitter, LSP, and a unified UI.
 
-I use **[`nvchad/ui`](https://github.com/NvChad/ui)** for a consistent interface and **[`mini.deps`](https://github.com/nvim-mini/mini.deps)** for plugin management. This combination keeps things simple and avoids the complexity of heavier frameworks, while still giving me full control over my config.
+I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin management. This combination keeps things simple and avoids the complexity of heavier frameworks, while still giving me full control over my config.
 
 ---
 
 ## Why This Setup?
 
-* **Fast** – Minimal plugin loader (`mini.deps`) means startup is nearly instant.
-* **Modular** – Plugins are split into categories, and configs live in their own files.
-* **Unified UI** – `nvchad/ui` provides consistency across statusline, tabline, telescope, and other components.
-* **Practical** – Includes all essentials: LSP, completion, autopairs, commenting, git integration, fuzzy finding, etc., without unnecessary extras.
+- **Fast** – Minimal plugin loader (`mini.deps`) means startup is nearly instant.
+- **Modular** – Three-layer architecture: `core/` (base config), `plugins/` (specs), `config/` (setup).
+- **Unified UI** – `nvchad/ui` provides a consistent statusline, theme engine, and components.
+- **Practical** – Includes LSP, completion, autopairs, git integration, fuzzy finding, file management, markdown notes, and more.
 
 ---
 
 ## Config Layout
 
-* **`lua/core/`** - Base Neovim setup (options, keymaps, autocmds)
-* **`lua/plugins/`** - Plugin specs, organized by purpose, loaded with `mini.deps`
-* **`lua/config/`** - Plugin configurations (e.g. `lsp.lua`, `ui.lua`, `file-manager.lua`)
-
-This separation makes the setup easy to maintain: plugin installation remains minimal, while configs are modular.
+- **`lua/core/`** – Base Neovim setup (options, keymaps, autocmds, utils, bootstrap)
+- **`lua/plugins/`** – Plugin specs organized by purpose, auto-loaded via `mini.deps`
+- **`lua/config/`** – Plugin configurations (LSP, UI, autocomplete, treesitter, etc.)
+- **`lua/chadrc.lua`** – NvChad UI overrides (theme, statusline, component toggles)
 
 ---
 
 ## Features
 
-* Treesitter syntax highlighting & indentation
-* File management via Oil.nvim
-* LSP with autocompletion (`blink.cmp`)
-* Autopairs, commenting, surround editing
-* Telescope fuzzy finder with custom mappings
-* Git integration (signs, diffs, statusline info)
-* Unified UI via `nvchad/ui`
-* Fast startup with `mini.deps`
+### Core
+- Treesitter syntax highlighting, indentation, and textobject selection
+- LSP support via `mason.nvim` with 10 servers: `lua_ls`, `html`, `cssls`, `tailwindcss`, `ts_ls`, `pyright`, `omnisharp`, `bashls`, `rust_analyzer`, `gopls`
+- Autocompletion with `blink.cmp` (color-enhanced menu, snippets)
+- Autopairs with treesitter integration
+
+### UI
+- NvChad unified UI (statusline, theme engine) – `ayu_light` theme
+- Indentation guides (`indent-blankline.nvim`)
+- Context-aware buffer navigation with preview (`cybu.nvim`)
+- Which-key popup for keybinding discovery
+- Git signs with inline blame (`gitsigns.nvim`)
+- LSP progress spinner (`fidget.nvim`)
+- Screenkey display for screencasts (`screenkey.nvim`)
+
+### Navigation & Editing
+- Telescope fuzzy finder (files, grep, buffers, git status, LSP symbols)
+- Oil.nvim file explorer (editor-based, with git status, delete-to-trash)
+- Increment/decrement numbers (`incr.nvim`)
+- Prevent nested Neovim instances (`unception.nvim`)
+- Markdown preview rendering (`markview.nvim`)
+- Trouble diagnostics viewer
+
+### Obsidian Integration
+- Full vault integration (daily notes, search, quick switch, backlinks, tags)
+- Paste images, footnotes, templates, checkboxes
+- Link and extract notes from visual selections
+- Workspace switching
+
+### Key Mappings
+
+| Mode | Key | Action |
+|---|---|---|
+| `n` | `<leader>ff` | Telescope find files |
+| `n` | `<leader>fg` | Telescope live grep |
+| `n` | `<leader>bb` | Telescope buffers |
+| `n` | `<leader>gt` | Telescope git status |
+| `n` | `<leader>e` / `<leader>E` | Oil (cwd or current) |
+| `n` | `gd` | LSP definition |
+| `n` | `gr` | LSP references |
+| `n` | `K` | LSP hover |
+| `n` | `<leader>la` | LSP code action |
+| `n` | `<leader>lr` | LSP rename |
+| `n` | `<leader>lf` | Format buffer |
+| `n` | `<leader>xx` / `<leader>xw` | Trouble diagnostics |
+| `n` | `<leader>oo`–`<leader>ouw` | Obsidian commands |
+| `n` | `<leader>st` | Toggle screenkey |
+| `n` | `<Tab>` / `<S-Tab>` | Buffer navigation (cybu) |
+| `n` | `<C-h/j/k/l>` | Window navigation |
+| `x` | `J` / `K` | Move lines up/down |
+| `x/o` | `af` / `if` / `ac` / `ic` | Treesitter textobjects |
 
 ---
 
 ## Install
-> I recommend forking the repo to make it your own
+
+> I recommend forking the repo to make it your own.
 
 1. Clone the repo:
 
