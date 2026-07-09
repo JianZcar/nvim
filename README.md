@@ -55,6 +55,14 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 - Link and extract notes from visual selections
 - Workspace switching
 
+### AI Assistant
+- Connect to any OpenCode server, or start an integrated instance
+- Inject editor context (cursor, selection, buffer, etc.) into prompts
+- Select from built-in and custom prompts
+- Execute OpenCode commands directly
+- Accept/reject and preview OpenCode edits via diff
+- Operator mappings for seamless range-based interaction
+
 ### Key Mappings
 
 | Mode | Key | Action |
@@ -72,6 +80,10 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 | `n` | `<leader>lf` | Format buffer |
 | `n` | `<leader>xx` / `<leader>xw` | Trouble diagnostics |
 | `n` | `<leader>oo`–`<leader>ouw` | Obsidian commands |
+| `n`/`x` | `<leader>oa` | Ask OpenCode |
+| `n`/`x` | `<leader>op` | Select OpenCode |
+| `n`/`x` | `go` | Append range to OpenCode |
+| `n` | `goo` | Append line to OpenCode |
 | `n` | `<leader>st` | Toggle screenkey |
 | `n` | `<Tab>` / `<S-Tab>` | Buffer navigation (cybu) |
 | `n` | `<C-h/j/k/l>` | Window navigation |
