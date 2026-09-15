@@ -4,14 +4,14 @@ require("plugins")
 local now, later = MiniDeps.now, MiniDeps.later
 
 vim.o.title = true
+vim.opt.shortmess:append("I")
 
 now(function()
+  require("config.ui")
   require("core.utils")
   require("core.options")
   require("core.keymaps")
   require("core.autocommands")
-
-  require("config.ui")
 end)
 
 later(function()
@@ -21,4 +21,6 @@ later(function()
   pcall(require, "config.file-manager")
   pcall(require, "config.obsidian")
   pcall(require, "config.opencode")
+
+  vim.g.loading_done = true
 end)

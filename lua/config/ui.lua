@@ -80,8 +80,7 @@ local telescope = {
     },
   },
   extensions = {
-    ["ui-select"] = {
-    }
+    ["ui-select"] = {},
   }
 }
 
