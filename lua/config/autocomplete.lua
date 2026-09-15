@@ -32,7 +32,7 @@ local blink = {
   },
 }
 
-autopairs = {
+local autopairs = {
   check_ts = true, -- enable treesitter integration
   fast_wrap = {},
 }

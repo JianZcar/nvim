@@ -40,7 +40,7 @@ require("markview").setup({
   experimental = {
     check_rtp_message = false
   }
-});
+})
 
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")

@@ -1,7 +1,7 @@
 require("core.bootstrap")
 require("plugins")
 
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+local now, later = MiniDeps.now, MiniDeps.later
 
 vim.o.title = true
 
