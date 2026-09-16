@@ -1,5 +1,5 @@
 local servers = {
-  "lua_ls", "html", "cssls", "tailwindcss", "ts_ls",
+  "lua_ls", "html", "cssls", "tailwindcss", "unocss", "ts_ls",
   "pyright", "omnisharp", "bashls", "rust_analyzer", "gopls",
 }
 
@@ -22,6 +22,28 @@ require("mason-lspconfig").setup({ ensure_installed = servers })
 vim.lsp.config("cssls", { filetypes = cssls_filetypes })
 
 require("otter").setup({ extensions = otter_extensions })
+
+-- workaround: otter's completion handler assumes `data` is a table, but the
+-- LSP spec allows any JSON value (tsserver returns a number) -> strip non-tables
+local otter_handlers = require("otter.lsp.handlers")
+local otter_method = vim.lsp.protocol.Methods.textDocument_completion
+local otter_orig = otter_handlers[otter_method]
+
+local function strip_item_data(res)
+  if type(res) ~= "table" then
+    return
+  end
+  for _, item in ipairs(res.items or res) do
+    if type(item.data) ~= "table" then
+      item.data = nil
+    end
+  end
+end
+
+otter_handlers[otter_method] = function(err, res, ctx)
+  strip_item_data(res)
+  return otter_orig(err, res, ctx)
+end
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = otter_filetypes,

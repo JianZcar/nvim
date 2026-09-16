@@ -27,13 +27,14 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 ## Features
 
 ### Core
-- Treesitter syntax highlighting, indentation, and textobject selection
-- LSP support via `mason.nvim` with 10 servers: `lua_ls`, `html`, `cssls`, `tailwindcss`, `ts_ls`, `pyright`, `omnisharp`, `bashls`, `rust_analyzer`, `gopls`
-- Autocompletion with `blink.cmp` (color-enhanced menu, snippets)
+- Treesitter syntax highlighting, indentation, and textobjects (javascript, typescript, html, css, styled, lua, python, bash, rust, go, c_sharp)
+- LSP support via `mason.nvim` with 11 servers: `lua_ls`, `html`, `cssls`, `tailwindcss`, `unocss`, `ts_ls`, `pyright`, `omnisharp`, `bashls`, `rust_analyzer`, `gopls`
+- Autocompletion with `blink.cmp` (`colorful-menu`, snippets, auto-brackets, doc preview)
+- LSP features for code embedded in documents (activates `html`/`styled` in JS, TS, and React buffers) — `otter.nvim`
 - Autopairs with treesitter integration
 
 ### UI
-- NvChad unified UI (statusline, theme engine) – `ayu_light` theme
+- NvChad unified UI (statusline, theme engine) – `ayu_light` theme, `vscode_colored` statusline
 - Indentation guides (`indent-blankline.nvim`)
 - Context-aware buffer navigation with preview (`cybu.nvim`)
 - Which-key popup for keybinding discovery
@@ -67,28 +68,47 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 
 | Mode | Key | Action |
 |---|---|---|
-| `n` | `<leader>ff` | Telescope find files |
-| `n` | `<leader>fg` | Telescope live grep |
-| `n` | `<leader>bb` | Telescope buffers |
-| `n` | `<leader>gt` | Telescope git status |
+| `n` | `<leader>w` / `<leader>q` | Save / Quit |
+| `n` | `<leader>W` / `<leader>Q` | Save all / Force quit all |
+| `n` | `<leader>c` | Close buffer |
+| `n` | `<leader>C` | Clear search highlights |
+| `n` | `<leader>bc` | Close buffer (jump to previous) |
+| `t` | `;;` | Escape terminal mode |
+| `n` | `n` / `N` | Search next / prev (centered) |
+| `n` | `<C-d>` / `<C-u>` | Half-page down / up (centered) |
+| `n` | `<C-h/j/k/l>` | Window navigation |
+| `n` | `<C-Up/Down>` / `<C-Left/Right>` | Resize height / width |
+| `n` | `<Tab>` / `<S-Tab>` | Next / prev buffer (cybu) |
+| `n` | `<leader>tn` / `<leader><Tab>` / `<leader><S-Tab>` | New / next / prev tab |
+| `n` | `<leader>ft` | Pick theme |
 | `n` | `<leader>e` / `<leader>E` | Oil (cwd or current) |
-| `n` | `gd` | LSP definition |
-| `n` | `gr` | LSP references |
-| `n` | `K` | LSP hover |
-| `n` | `<leader>la` | LSP code action |
-| `n` | `<leader>lr` | LSP rename |
-| `n` | `<leader>lf` | Format buffer |
-| `n` | `<leader>xx` / `<leader>xw` | Trouble diagnostics |
-| `n` | `<leader>oo`–`<leader>ouw` | Obsidian commands |
-| `n`/`x` | `<leader>oa` | Ask OpenCode |
-| `n`/`x` | `<leader>op` | Select OpenCode |
+| `n` | `<leader>ff` / `<leader>fg` | Telescope find files / live grep |
+| `n` | `<leader>bb` / `<leader>gt` | Telescope buffers / git status |
+| `n` | `gd` / `gr` / `K` | LSP definition / references / hover |
+| `n` | `<leader>la` / `<leader>lr` | LSP code action / rename |
+| `n`/`v` | `<leader>lf` | Format buffer / selection |
+| `n` | `<leader>xx` / `<leader>xw` | Trouble diagnostics (all / buffer) |
+| `n` | `<leader>xl` / `<leader>xq` | Trouble loclist / quickfix |
+| `n` | `<leader>st` | Toggle screenkey |
+| `n` | `<C-Space>` / `<BS>` | Increment / decrement number |
+| `n`/`x` | `<leader>oa` | Ask OpenCode (`@this`) |
+| `n`/`x` | `<leader>op` | Select OpenCode prompt |
 | `n`/`x` | `go` | Append range to OpenCode |
 | `n` | `goo` | Append line to OpenCode |
-| `n` | `<leader>st` | Toggle screenkey |
-| `n` | `<Tab>` / `<S-Tab>` | Buffer navigation (cybu) |
-| `n` | `<C-h/j/k/l>` | Window navigation |
-| `x` | `J` / `K` | Move lines up/down |
-| `x/o` | `af` / `if` / `ac` / `ic` | Treesitter textobjects |
+| `n` | `<S-C-u>` / `<S-C-d>` | Scroll OpenCode session |
+| `n` | `<leader>oo` / `<leader>os` | Obsidian today's note / search |
+| `n` | `<leader>oq` / `<leader>ol` | Obsidian quick switch / open note |
+| `n` | `<leader>od` / `<leader>on` | Obsidian dailies / new note |
+| `n` | `<leader>ot` / `<leader>ob` | Obsidian tags / backlinks |
+| `n` | `<leader>o.` / `<leader>o,` | Obsidian follow link / toc |
+| `n` | `<leader>of` / `<leader>oi` | Obsidian footnotes / paste image |
+| `n` | `<leader>or` / `<leader>ox` | Obsidian rename / toggle checkbox |
+| `n` | `<leader>otm` / `<leader>oun` | Obsidian template / unique note |
+| `n` | `<leader>ouw` | Obsidian switch workspace |
+| `v` | `<leader>oe` / `<leader>ol` | Obsidian extract / link selection |
+| `x`/`o` | `af` / `if` / `ac` / `ic` | Treesitter textobjects (function/class) |
+| `n` | `<leader>a` / `<leader>A` | Swap next / prev parameter |
+| `x` | `J` / `K` | Move lines down / up |
 
 ---
 
@@ -98,8 +118,8 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 
 1. Clone the repo:
 
-```bash
-git clone https://github.com/JianZcar/nvim.git ~/.config/nvim
-```
+    ```bash
+    git clone https://github.com/JianZcar/nvim.git ~/.config/nvim
+    ```
 
 2. Open Neovim — plugins will install automatically.
