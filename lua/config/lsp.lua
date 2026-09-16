@@ -55,3 +55,38 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 require("trouble").setup()
+
+local formatters_by_ft = {
+  bash = { "shfmt" },
+  sh = { "shfmt" },
+  css = { "prettierd", "prettier" },
+  go = { "gofmt" },
+  html = { "prettierd", "prettier" },
+  javascript = { "prettierd", "prettier" },
+  javascriptreact = { "prettierd", "prettier" },
+  json = { "prettierd", "prettier" },
+  jsonc = { "prettierd", "prettier" },
+  less = { "prettierd", "prettier" },
+  lua = { "stylua" },
+  markdown = { "prettierd", "prettier" },
+  python = { "isort", "black" },
+  rust = { "rustfmt" },
+  scss = { "prettierd", "prettier" },
+  styled = { "prettierd", "prettier" },
+  typescript = { "prettierd", "prettier" },
+  typescriptreact = { "prettierd", "prettier" },
+}
+
+require("conform").setup({
+  formatters_by_ft = formatters_by_ft,
+  default_format_opts = {
+    lsp_format = "fallback",
+  },
+})
+
+-- Register LSP keymaps per-buffer so they only exist when an LSP is attached
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    require("core.keymaps").lsp_maps(args.buf)
+  end,
+})

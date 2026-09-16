@@ -3,9 +3,6 @@ return {
     source = "nvchad/ui",
   },
   {
-    source = "lewis6991/gitsigns.nvim",
-  },
-  {
     source = "folke/which-key.nvim",
   },
   {

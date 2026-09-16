@@ -8,5 +8,8 @@ return {
   },
   {
     source = "folke/trouble.nvim"
+  },
+  {
+    source = "stevearc/conform.nvim"
   }
 }

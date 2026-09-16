@@ -43,6 +43,7 @@ vim.opt.writebackup = false                                 -- Don't create back
 vim.opt.swapfile = false                                    -- Don't create swap files
 vim.opt.undofile = true                                     -- Persistent undo
 vim.opt.undodir = vim.fn.expand("~/.local/state/nvim/undo") -- Undo directory
+vim.fn.mkdir(vim.opt.undodir:get()[1], "p")               -- Ensure undo dir exists
 vim.opt.updatetime = 250                                    -- Faster completion
 vim.opt.timeoutlen = 500                                    -- Key timeout duration
 vim.opt.ttimeoutlen = 0                                     -- Key code timeout
@@ -53,14 +54,11 @@ vim.opt.autowrite = false                                   -- Don't auto save
 vim.opt.hidden = true                   -- Allow hidden buffers
 vim.opt.errorbells = false              -- No error bells
 vim.opt.backspace = "indent,eol,start"  -- Better backspace behavior
-vim.opt.autochdir = false               -- Don't auto change directory
 vim.opt.iskeyword:append("-")           -- Treat dash as part of word
 vim.opt.path:append("**")               -- include subdirectories in search
 vim.opt.selection = "inclusive"         -- Selection behavior
 vim.opt.mouse = "a"                     -- Enable mouse support
 vim.opt.clipboard:append("unnamedplus") -- Use system clipboard
-vim.opt.modifiable = true               -- Allow buffer modifications
-vim.opt.encoding = "UTF-8"              -- Set encoding
 
 vim.opt.guicursor = {
   "n:block-Cursor",                        -- Normal = solid block, no blink
@@ -80,3 +78,7 @@ vim.opt.foldlevel = 99                              -- Start with all folds open
 -- Split behavior
 vim.opt.splitbelow = true -- Horizontal splits go below
 vim.opt.splitright = true -- Vertical splits go right
+
+-- Disable netrw; oil.nvim owns file browsing
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

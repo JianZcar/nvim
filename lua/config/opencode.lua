@@ -1,5 +1,3 @@
-vim.g.opencode_opts = {}
-
 vim.keymap.set({ "n", "x" }, "<leader>oa", function()
   require("opencode").ask("@this: ")
 end, { desc = "Ask OpenCode" })

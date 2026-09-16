@@ -15,12 +15,19 @@ now(function()
 end)
 
 later(function()
-  pcall(require, "config.treesitter")
-  pcall(require, "config.lsp")
-  pcall(require, "config.autocomplete")
-  pcall(require, "config.file-manager")
-  pcall(require, "config.obsidian")
-  pcall(require, "config.opencode")
+  local function load(name)
+    local ok, err = pcall(require, name)
+    if not ok then
+      vim.notify("Failed to load " .. name .. ": " .. tostring(err), vim.log.levels.ERROR)
+    end
+  end
 
-  vim.g.loading_done = true
+  load("config.treesitter")
+  load("config.lsp")
+  load("config.autocomplete")
+  load("config.file-manager")
+  load("config.picker")
+  load("config.obsidian")
+  load("config.opencode")
+  load("config.git")
 end)

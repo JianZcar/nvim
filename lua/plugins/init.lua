@@ -1,9 +1,13 @@
-local add, dir = MiniDeps.add, vim.fn.stdpath("config") .. "/lua/plugins"
+local add = MiniDeps.add
 
-for _, f in ipairs(vim.fn.readdir(dir, [[v:val =~ '\.lua$']])) do
-  if f ~= "init.lua" then
-    for _, spec in ipairs(require("plugins." .. f:gsub("%.lua$", ""))) do
-      add(spec)
-    end
+-- Explicit list so stray files in this directory are never auto-loaded.
+local specs = {
+  "core", "ui", "lsp", "autocomplete", "picker", "colorscheme",
+  "file-manager", "obsidian", "opencode", "screenkey", "git",
+}
+
+for _, name in ipairs(specs) do
+  for _, spec in ipairs(require("plugins." .. name)) do
+    add(spec)
   end
 end

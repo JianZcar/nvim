@@ -1,7 +1,3 @@
-require("gitsigns").setup({
-  current_line_blame = true,
-})
-
 local indent = {
   scope = {
     enabled = true,                      -- enable scope guides
@@ -13,6 +9,11 @@ local indent = {
 }
 
 local cybu = {
+  position = {
+    anchor = "center", -- center the preview instead of a tabbar on top
+    vertical_offset = 0,
+    horizontal_offset = 0,
+  },
   style = {
     path = "relative", -- absolute, relative, tail (filename only),
     -- tail_dir (filename & parent dir)
@@ -89,8 +90,12 @@ local fidget = {
 }
 
 require("base46").load_all_highlights()
-for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
-  dofile(vim.g.base46_cache .. v)
+if vim.fn.isdirectory(vim.g.base46_cache) then
+  for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do
+    if vim.fn.isdirectory(vim.g.base46_cache .. v) == 0 then
+      dofile(vim.g.base46_cache .. v)
+    end
+  end
 end
 require("nvchad")
 require("screenkey")

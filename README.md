@@ -19,7 +19,7 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 
 - **`lua/core/`** – Base Neovim setup (options, keymaps, autocmds, utils, bootstrap)
 - **`lua/plugins/`** – Plugin specs organized by purpose, auto-loaded via `mini.deps`
-- **`lua/config/`** – Plugin configurations (LSP, UI, autocomplete, treesitter, etc.)
+- **`lua/config/`** – Plugin configurations (LSP, UI, autocomplete, treesitter, git, etc.)
 - **`lua/chadrc.lua`** – NvChad UI overrides (theme, statusline, component toggles)
 
 ---
@@ -27,24 +27,28 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 ## Features
 
 ### Core
-- Treesitter syntax highlighting, indentation, and textobjects (javascript, typescript, html, css, styled, lua, python, bash, rust, go, c_sharp)
+- Treesitter syntax highlighting, indentation, and textobjects (javascript, typescript, tsx, html, css, styled, lua, python, bash, rust, go, c_sharp; JSX/TSX via typescriptreact/javascriptreact)
 - LSP support via `mason.nvim` with 11 servers: `lua_ls`, `html`, `cssls`, `tailwindcss`, `unocss`, `ts_ls`, `pyright`, `omnisharp`, `bashls`, `rust_analyzer`, `gopls`
 - Autocompletion with `blink.cmp` (`colorful-menu`, snippets, auto-brackets, doc preview)
 - LSP features for code embedded in documents (activates `html`/`styled` in JS, TS, and React buffers) — `otter.nvim`
+- Formatting via `conform.nvim` (prettier, stylua, black, gofmt, rustfmt, shfmt) with LSP fallback
 - Autopairs with treesitter integration
+- Surround editing (`mini.surround`) and comment toggling (`mini.comment`)
 
 ### UI
 - NvChad unified UI (statusline, theme engine) – `ayu_light` theme, `vscode_colored` statusline
 - Indentation guides (`indent-blankline.nvim`)
 - Context-aware buffer navigation with preview (`cybu.nvim`)
 - Which-key popup for keybinding discovery
-- Git signs with inline blame (`gitsigns.nvim`)
+- Git signs with inline blame (`gitsigns.nvim`) — `lua/config/git.lua`
+- Lazygit integration for commits, staging, and diffs (`<leader>gg`)
 - LSP progress spinner (`fidget.nvim`)
 - Screenkey display for screencasts (`screenkey.nvim`)
 
 ### Navigation & Editing
 - Telescope fuzzy finder (files, grep, buffers, git status, LSP symbols)
-- Oil.nvim file explorer (editor-based, with git status, delete-to-trash)
+- Search & replace across files (`grug-far.nvim`, `<leader>fr`)
+- Oil.nvim file explorer (editor-based, with git status, delete-to-trash; netrw disabled)
 - Increment/decrement numbers (`incr.nvim`)
 - Prevent nested Neovim instances (`unception.nvim`)
 - Markdown preview rendering (`markview.nvim`)
@@ -79,14 +83,17 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 | `n` | `<C-h/j/k/l>` | Window navigation |
 | `n` | `<C-Up/Down>` / `<C-Left/Right>` | Resize height / width |
 | `n` | `<Tab>` / `<S-Tab>` | Next / prev buffer (cybu) |
-| `n` | `<leader>tn` / `<leader><Tab>` / `<leader><S-Tab>` | New / next / prev tab |
 | `n` | `<leader>ft` | Pick theme |
 | `n` | `<leader>e` / `<leader>E` | Oil (cwd or current) |
 | `n` | `<leader>ff` / `<leader>fg` | Telescope find files / live grep |
 | `n` | `<leader>bb` / `<leader>gt` | Telescope buffers / git status |
-| `n` | `gd` / `gr` / `K` | LSP definition / references / hover |
-| `n` | `<leader>la` / `<leader>lr` | LSP code action / rename |
-| `n`/`v` | `<leader>lf` | Format buffer / selection |
+| `n` | `<leader>fr` | Find & replace (grug-far) |
+| `n` | `<leader>gg` / `<leader>gb` | Open lazygit / blame file (side window) |
+| `n` | `gd` / `gr` / `K` | LSP definition / references / hover (buffer-local, on attach) |
+| `n` | `<leader>la` / `<leader>lr` | LSP code action / rename (buffer-local, on attach) |
+| `n` | `<leader>li` / `<leader>ls` | LSP toggle inlay hints / document symbols |
+| `n` | `<leader>lR` / `<leader>lS` | LSP restart / start |
+| `n`/`v` | `<leader>lf` | Format buffer / selection (conform + LSP fallback) |
 | `n` | `<leader>xx` / `<leader>xw` | Trouble diagnostics (all / buffer) |
 | `n` | `<leader>xl` / `<leader>xq` | Trouble loclist / quickfix |
 | `n` | `<leader>st` | Toggle screenkey |
@@ -107,7 +114,9 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 | `n` | `<leader>ouw` | Obsidian switch workspace |
 | `v` | `<leader>oe` / `<leader>ol` | Obsidian extract / link selection |
 | `x`/`o` | `af` / `if` / `ac` / `ic` | Treesitter textobjects (function/class) |
-| `n` | `<leader>a` / `<leader>A` | Swap next / prev parameter |
+| `n` | `gs` / `gS` | Swap next / prev parameter |
+| `n` | `sa` / `sd` / `sr` | mini.surround: add / delete / replace |
+| `n`/`v` | `gcc` / `gc` | mini.comment: toggle line / selection |
 | `x` | `J` / `K` | Move lines down / up |
 
 ---
