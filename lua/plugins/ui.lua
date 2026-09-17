@@ -7,7 +7,6 @@ return {
   },
   {
     source = "j-hui/fidget.nvim",
-    checkout = "v1.6.1"
   },
   {
     source = "lukas-reineke/indent-blankline.nvim"
@@ -15,5 +14,8 @@ return {
   {
     source = "ghillb/cybu.nvim",
     depends = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"}
+  },
+  {
+    source = "OXY2DEV/markview.nvim",
   }
 }

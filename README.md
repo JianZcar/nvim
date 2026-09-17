@@ -31,7 +31,9 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 - LSP support via `mason.nvim` with 11 servers: `lua_ls`, `html`, `cssls`, `tailwindcss`, `unocss`, `ts_ls`, `pyright`, `omnisharp`, `bashls`, `rust_analyzer`, `gopls`
 - Autocompletion with `blink.cmp` (`colorful-menu`, snippets, auto-brackets, doc preview)
 - LSP features for code embedded in documents (activates `html`/`styled` in JS, TS, and React buffers) — `otter.nvim`
-- Formatting via `conform.nvim` (prettier, stylua, black, gofmt, rustfmt, shfmt) with LSP fallback
+- Formatting via `conform.nvim` (prettierd/prettier, stylua, black+isort, gofmt, rustfmt, shfmt, taplo, yamlfmt) with LSP fallback, `trim_whitespace`, and `:FormatDisable/:FormatEnable`
+- Formatters/linters auto-installed via `mason-tool-installer.nvim` + `mason-nvim-lint`
+- Linting via `nvim-lint` (shellcheck, luacheck, eslint_d, yamllint, hadolint)
 - Autopairs with treesitter integration
 - Surround editing (`mini.surround`) and comment toggling (`mini.comment`)
 
@@ -40,19 +42,21 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 - Indentation guides (`indent-blankline.nvim`)
 - Context-aware buffer navigation with preview (`cybu.nvim`)
 - Which-key popup for keybinding discovery
-- Git signs with inline blame (`gitsigns.nvim`) — `lua/config/git.lua`
+- Git signs (`gitsigns.nvim`) — `lua/config/git.lua`
 - Lazygit integration for commits, staging, and diffs (`<leader>gg`)
 - LSP progress spinner (`fidget.nvim`)
 - Screenkey display for screencasts (`screenkey.nvim`)
 
 ### Navigation & Editing
-- Telescope fuzzy finder (files, grep, buffers, git status, LSP symbols)
+- Telescope fuzzy finder (files, grep, buffers, git status, LSP symbols; `%`-based layout, ignores `.git/`/`node_modules/`)
 - Search & replace across files (`grug-far.nvim`, `<leader>fr`)
-- Oil.nvim file explorer (editor-based, with git status, delete-to-trash; netrw disabled)
-- Increment/decrement numbers (`incr.nvim`)
+- Oil.nvim file explorer (editor-based, with git status, delete-to-trash via FreeDesktop Trash; netrw disabled)
+- Treesitter incremental selection (`<C-Space>` expand / `<BS>` shrink) and textobjects/swap
+- Flash jump (`s`/`S`)
 - Prevent nested Neovim instances (`unception.nvim`)
 - Markdown preview rendering (`markview.nvim`)
 - Trouble diagnostics viewer
+- Sessions (`mini.sessions`: save/picker/delete/latest)
 
 ### Obsidian Integration
 - Full vault integration (daily notes, search, quick switch, backlinks, tags)
@@ -74,9 +78,11 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 |---|---|---|
 | `n` | `<leader>w` / `<leader>q` | Save / Quit |
 | `n` | `<leader>W` / `<leader>Q` | Save all / Force quit all |
-| `n` | `<leader>c` | Close buffer |
+| `n` | `<leader>c` | Close buffer (keeps unsaved work) |
 | `n` | `<leader>C` | Clear search highlights |
-| `n` | `<leader>bc` | Close buffer (jump to previous) |
+| `n` | `<leader>n` | New buffer |
+| `n` | `<leader>h` / `<leader>v` | New horizontal / vertical window |
+| `n` | `<leader>z` | Toggle fold |
 | `t` | `;;` | Escape terminal mode |
 | `n` | `n` / `N` | Search next / prev (centered) |
 | `n` | `<C-d>` / `<C-u>` | Half-page down / up (centered) |
@@ -84,20 +90,28 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 | `n` | `<C-Up/Down>` / `<C-Left/Right>` | Resize height / width |
 | `n` | `<Tab>` / `<S-Tab>` | Next / prev buffer (cybu) |
 | `n` | `<leader>ft` | Pick theme |
-| `n` | `<leader>e` / `<leader>E` | Oil (cwd or current) |
+| `n` | `<leader>e` / `<leader>E` | Oil (parent of current / cwd, with preview) |
 | `n` | `<leader>ff` / `<leader>fg` | Telescope find files / live grep |
-| `n` | `<leader>bb` / `<leader>gt` | Telescope buffers / git status |
+| `n` | `<leader>b` / `<leader>gt` | Telescope buffers / git status |
 | `n` | `<leader>fr` | Find & replace (grug-far) |
-| `n` | `<leader>gg` / `<leader>gb` | Open lazygit / blame file (side window) |
+| `n` | `<leader>gg` / `<leader>gb` | Open lazygit / blame file (window) |
 | `n` | `gd` / `gr` / `K` | LSP definition / references / hover (buffer-local, on attach) |
+| `n` | `gy` / `gD` / `gl` | LSP type-definition / declaration / line diagnostics |
+| `n` | `[d` / `]d` | Prev / next diagnostic |
 | `n` | `<leader>la` / `<leader>lr` | LSP code action / rename (buffer-local, on attach) |
 | `n` | `<leader>li` / `<leader>ls` | LSP toggle inlay hints / document symbols |
 | `n` | `<leader>lR` / `<leader>lS` | LSP restart / start |
 | `n`/`v` | `<leader>lf` | Format buffer / selection (conform + LSP fallback) |
+| `n` | `:FormatDisable[!]` / `:FormatEnable` | Disable / re-enable format-on-save |
+| `n` | `<leader>tl` | Toggle lint suggestions |
+| `n` | `:LintDisable[!]` / `:LintEnable` | Disable / re-enable lint suggestions |
 | `n` | `<leader>xx` / `<leader>xw` | Trouble diagnostics (all / buffer) |
 | `n` | `<leader>xl` / `<leader>xq` | Trouble loclist / quickfix |
 | `n` | `<leader>st` | Toggle screenkey |
-| `n` | `<C-Space>` / `<BS>` | Increment / decrement number |
+| `n` | `<leader>ss` / `<leader>sr` | Sessions: save / restore picker |
+| `n` | `<leader>sd` / `<leader>sl` | Sessions: delete picker / restore latest |
+| `n` | `<C-Space>` / `<BS>` | Treesitter expand to parent / shrink (visual) |
+| `n`/`x`/`o` | `s` / `S` | Flash jump / treesitter select (overrides `s` substitute) |
 | `n`/`x` | `<leader>oa` | Ask OpenCode (`@this`) |
 | `n`/`x` | `<leader>op` | Select OpenCode prompt |
 | `n`/`x` | `go` | Append range to OpenCode |
@@ -106,7 +120,7 @@ I use **`nvchad/ui`** for a consistent interface and **`mini.deps`** for plugin 
 | `n` | `<leader>oo` / `<leader>os` | Obsidian today's note / search |
 | `n` | `<leader>oq` / `<leader>ol` | Obsidian quick switch / open note |
 | `n` | `<leader>od` / `<leader>on` | Obsidian dailies / new note |
-| `n` | `<leader>ot` / `<leader>ob` | Obsidian tags / backlinks |
+| `n` | `<leader>oT` / `<leader>ob` | Obsidian tags / backlinks |
 | `n` | `<leader>o.` / `<leader>o,` | Obsidian follow link / toc |
 | `n` | `<leader>of` / `<leader>oi` | Obsidian footnotes / paste image |
 | `n` | `<leader>or` / `<leader>ox` | Obsidian rename / toggle checkbox |

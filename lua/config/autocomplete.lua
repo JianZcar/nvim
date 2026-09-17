@@ -4,7 +4,7 @@ local blink = {
     enabled = false,
   },
   keymap = {
-    preset = "default", -- uses sensible defaults
+    preset = "default",
     ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
     ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
     ["<CR>"] = { "accept", "fallback" }
@@ -33,12 +33,14 @@ local blink = {
 }
 
 local autopairs = {
-  check_ts = true, -- enable treesitter integration
+  check_ts = true,
   fast_wrap = {},
 }
 
 for k, v in pairs(nvchad_blink) do
-  if blink[k] == nil then
+  if type(v) == "table" and type(blink[k]) == "table" then
+    blink[k] = vim.tbl_deep_extend("force", v, blink[k])
+  elseif blink[k] == nil then
     blink[k] = v
   end
 end

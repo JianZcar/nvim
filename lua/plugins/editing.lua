@@ -1,7 +1,6 @@
 return {
   {
     source = "nvim-treesitter/nvim-treesitter",
-    depends = { "OXY2DEV/markview.nvim" },
     checkout = "main",
     hooks = { post_checkout = function() vim.cmd("TSUpdate") end },
   },
@@ -10,10 +9,10 @@ return {
     checkout = "main"
   },
   {
-    source = "williamboman/mason.nvim"
+    source = "windwp/nvim-ts-autotag"
   },
   {
-    source = "daliusd/incr.nvim"
+    source = "JoosepAlviste/nvim-ts-context-commentstring"
   },
   {
     source = "samjwill/nvim-unception"
@@ -23,5 +22,8 @@ return {
   },
   {
     source = "echasnovski/mini.comment"
+  },
+  {
+    source = "folke/flash.nvim"
   }
 }

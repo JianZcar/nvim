@@ -23,11 +23,12 @@ later(function()
   end
 
   load("config.treesitter")
+  load("config.editing")
   load("config.lsp")
   load("config.autocomplete")
   load("config.file-manager")
   load("config.picker")
   load("config.obsidian")
-  load("config.opencode")
   load("config.git")
+  load("config.sessions")
 end)

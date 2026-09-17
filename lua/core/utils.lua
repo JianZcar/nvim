@@ -1,14 +1,18 @@
 local M = {}
 
-function M.strip_trailing_whitespace(bufnr)
+-- Clear only nvim-lint diagnostics for a buffer (LSP diagnostics untouched).
+function M.clear_lint_diagnostics(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
-  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-
-  for i, line in ipairs(lines) do
-    lines[i] = line:gsub("%s+$", "")
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return
   end
-
-  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+  local ok, lint = pcall(require, "lint")
+  if not ok then
+    return
+  end
+  for _, name in ipairs(lint.linters_by_ft[vim.bo[bufnr].filetype] or {}) do
+    vim.diagnostic.reset(lint.get_namespace(name), bufnr)
+  end
 end
 
 local function package_ready(mod)
@@ -30,6 +34,8 @@ function M.cmd_when_loaded(mod, cmd)
   return function()
     if package_ready(mod) then
       vim.cmd(cmd)
+    else
+      vim.notify(mod .. " is not available", vim.log.levels.WARN)
     end
   end
 end

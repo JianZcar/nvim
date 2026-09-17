@@ -1,7 +1,10 @@
 return {
   {
-    source = "williamboman/mason-lspconfig.nvim",
-    depends = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    source = "mason-org/mason.nvim"
+  },
+  {
+    source = "mason-org/mason-lspconfig.nvim",
+    depends = { "neovim/nvim-lspconfig" },
   },
   {
     source = "jmbuhr/otter.nvim"
@@ -11,5 +14,16 @@ return {
   },
   {
     source = "stevearc/conform.nvim"
-  }
+  },
+  {
+    source = "mfussenegger/nvim-lint"
+  },
+  {
+    source = "rshkarin/mason-nvim-lint",
+    depends = { "mfussenegger/nvim-lint" },
+  },
+  {
+    source = "WhoIsSethDaniel/mason-tool-installer.nvim",
+    depends = { "mason-org/mason.nvim" },
+  },
 }

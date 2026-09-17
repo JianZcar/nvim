@@ -2,14 +2,11 @@ local M = {}
 
 M.base46 = {
   theme = "ayu_light",
+  excluded = { "cmp", "nvimtree", "nvcheatsheet", "tbline" },
 }
 M.ui = {
   cmp = {
-    lspkind_text = true,
     style = "flat_dark",
-    format_colors = {
-      lsp = true,
-    },
   },
   statusline = {
     theme = "vscode_colored"
